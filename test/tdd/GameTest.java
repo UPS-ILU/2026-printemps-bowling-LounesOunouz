@@ -13,6 +13,12 @@ class GameTest {
 		gamer = new Game();
 	}
 
+	private void jouer(int fois, int n) {
+		for (int i = 0; i < fois; i++) {
+			gamer.roll(n);
+		}
+	}
+
 	@Test
 	void testOneOne() {
 		gamer.roll(0);
@@ -22,22 +28,25 @@ class GameTest {
 	@Test
 	void testONetwo() {
 
-		for (int i = 0; i < 20; i++) {
-			gamer.roll(1);
-		}
+		jouer(20, 1);
 		assertEquals(20, gamer.score());
 	}
 
 	@Test
 	void testOneThree() {
-		for (int i = 0; i < 10; i++) {
-			gamer.roll(1);
-		}
-		for (int i = 0; i < 20; i++) {
-			gamer.roll(1);
-		}
+		jouer(10, 1);
+		jouer(20, 1);
 		assertEquals(30, gamer.score());
 
 	}
 
+	@Test
+	void testSpare() {
+		gamer.roll(7);
+		gamer.roll(3);
+		gamer.roll(4);
+		jouer(17, 0);
+		assertEquals(18, gamer.score());
+
+	}
 }
